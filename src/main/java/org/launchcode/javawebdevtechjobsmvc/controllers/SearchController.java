@@ -32,7 +32,7 @@ public class SearchController {
          ArrayList<Job> matchingJobs;
 
         //of search type is all and search term is an empty string then return all jobs
-        if (searchType.toLowerCase().equals("all") || searchTerm.equals("")) {
+        if (searchTerm.toLowerCase().equals("all") || searchTerm.equals("")) {
             matchingJobs = JobData.findAll();
         } else {
             matchingJobs = JobData.findByColumnAndValue(searchType, searchTerm);
@@ -46,6 +46,7 @@ public class SearchController {
 
         model.addAttribute("title", "Jobs with " + columnChoices.get(searchType) + ": " + searchTerm);
         model.addAttribute("jobs", matchingJobs);
+        model.addAttribute("searchSelected", columnChoices.get(searchType) );
 
         return "search";
 
